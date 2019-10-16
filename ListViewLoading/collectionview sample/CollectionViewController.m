@@ -22,8 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.collectionView.loadingDelegate = self;
     [self.collectionView startLoading];
-    self.collectionView.scrollEnabled = NO;
+
     ///模仿网络请求
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        //net-request
@@ -74,12 +75,10 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         CollectionViewCell1 *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CollectionViewCell1" forIndexPath:indexPath];
-        cell.sunshineViews = @[cell];
         cell.valueLabel.text = @"100元";
         return cell;
     }else {
         CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CollectionViewCell" forIndexPath:indexPath];
-        cell.sunshineViews = @[cell.payIcon, cell.payway, cell.checkBox];
         cell.payway.text = @"支付渠道";
         return cell;
     }
@@ -93,7 +92,6 @@
         }else {
             header.headerText.attributedText = [[NSAttributedString alloc] initWithString:@"选择充值方式" attributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
         }
-        header.sunshineViews = @[header.headerText];
         return header;
     }else {
         

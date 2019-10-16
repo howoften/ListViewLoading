@@ -12,16 +12,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol UITableViewLoadingDelegate <NSObject>
 @required
-- (NSInteger)sectionsOfloadingTableView:(UITableView *)tableView;
 - (NSInteger)loadingTableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 - (UITableViewCell *)loadingTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 @optional
+- (NSInteger)sectionsOfloadingTableView:(UITableView *)tableView;
 - (UIView *)loadingTableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section;
 - (UIView *)loadingTableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section;
 @end
 
 @interface UITableView (Loading)
 @property (nonatomic, readonly)BOOL loading;
+@property (nonatomic, weak)id<UITableViewLoadingDelegate> loadingDelegate;
+
 
 - (void)startLoading;
 - (void)stopLoading;
