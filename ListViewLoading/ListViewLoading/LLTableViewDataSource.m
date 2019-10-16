@@ -82,7 +82,7 @@
     if ([self.replace_dataSource respondsToSelector:@selector(tableView:canMoveRowAtIndexPath:)]) {
         return [self.replace_dataSource tableView:tableView canMoveRowAtIndexPath:indexPath];
     }
-    return NO;
+    return YES;
 }
 
 // Index
@@ -168,17 +168,35 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if ([self.replace_delegate respondsToSelector:@selector(tableView:heightForHeaderInSection:)]) {
-        return [self.replace_delegate tableView:tableView heightForHeaderInSection:section];
+    if ([tableView loading]) {
+        if ([self.loadingDelegate respondsToSelector:@selector(loadingTableView:viewForHeaderInSection:)]) {
+            UIView *header = [self.loadingDelegate loadingTableView:tableView viewForHeaderInSection:section];
+            if (header) {
+                return [self.replace_delegate tableView:tableView heightForHeaderInSection:section];
+            }
+        }
+    }else {
+        if ([self.replace_delegate respondsToSelector:@selector(tableView:heightForHeaderInSection:)]) {
+            return [self.replace_delegate tableView:tableView heightForHeaderInSection:section];
+        }
     }
-    return 0;
+    return 0.0001f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if ([self.replace_delegate respondsToSelector:@selector(tableView:heightForFooterInSection:)]) {
-        return [self.replace_delegate tableView:tableView heightForFooterInSection:section];
+    if ([tableView loading]) {
+        if ([self.loadingDelegate respondsToSelector:@selector(loadingTableView:viewForFooterInSection:)]) {
+            UIView *footer = [self.loadingDelegate loadingTableView:tableView viewForFooterInSection:section];
+            if (footer) {
+                return [self.replace_delegate tableView:tableView heightForFooterInSection:section];
+            }
+        }
+    }else {
+        if ([self.replace_delegate respondsToSelector:@selector(tableView:heightForFooterInSection:)]) {
+            return [self.replace_delegate tableView:tableView heightForFooterInSection:section];
+        }
     }
-    return 0;
+    return 0.0001f;
 }
 
 // Use the estimatedHeight methods to quickly calcuate guessed values which will allow for fast load times of the table.
@@ -194,14 +212,14 @@
     if ([self.replace_delegate respondsToSelector:@selector(tableView:estimatedHeightForHeaderInSection:)]) {
         return [self.replace_delegate tableView:tableView estimatedHeightForHeaderInSection:section];
     }
-    return 1;
+    return 0.0001f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForFooterInSection:(NSInteger)section {
     if ([self.replace_delegate respondsToSelector:@selector(tableView:estimatedHeightForFooterInSection:)]) {
         return [self.replace_delegate tableView:tableView estimatedHeightForFooterInSection:section];
     }
-    return 0;
+    return 0.0001f;
 }
 
 // Section header & footer information. Views are preferred over title should you decide to provide both
@@ -227,7 +245,7 @@
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     if ([tableView loading]) {
         if ([self.loadingDelegate respondsToSelector:@selector(loadingTableView:viewForFooterInSection:)]) {
-            UIView *footer = [self.loadingDelegate loadingTableView:tableView viewForHeaderInSection:section];
+            UIView *footer = [self.loadingDelegate loadingTableView:tableView viewForFooterInSection:section];
             [self beginLoadingAnimation:footer];
             return footer;
         }
@@ -265,7 +283,7 @@
     if ([self.replace_delegate respondsToSelector:@selector(tableView:shouldHighlightRowAtIndexPath:)]) {
         return [self.replace_delegate tableView:tableView shouldHighlightRowAtIndexPath:indexPath];
     }
-    return NO;
+    return YES;
 }
 - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.replace_delegate respondsToSelector:@selector(tableView:didHighlightRowAtIndexPath:)]) {

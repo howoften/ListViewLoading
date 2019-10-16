@@ -90,9 +90,10 @@
 
 - (void)startLoading {
     if ([self.loadingDelegate conformsToProtocol:@protocol(UITableViewLoadingDelegate)]) {
-        if ([self.loadingDelegate respondsToSelector:@selector(sectionsOfloadingTableView:)] && [self.loadingDelegate respondsToSelector:@selector(loadingTableView:numberOfRowsInSection:)] && [self.loadingDelegate respondsToSelector:@selector(loadingTableView:cellForRowAtIndexPath:)]) {
+        if ([self.loadingDelegate respondsToSelector:@selector(loadingTableView:numberOfRowsInSection:)] && [self.loadingDelegate respondsToSelector:@selector(loadingTableView:cellForRowAtIndexPath:)]) {
             self.loading = YES;
             self.allowsSelection = NO;
+            self.scrollEnabled = NO;
             [self reloadData];
         }
     }
@@ -100,9 +101,10 @@
 
 - (void)stopLoading {
     if ([self.loadingDelegate conformsToProtocol:@protocol(UITableViewLoadingDelegate)]) {
-        if ([self.loadingDelegate respondsToSelector:@selector(sectionsOfloadingTableView:)] && [self.loadingDelegate respondsToSelector:@selector(loadingTableView:numberOfRowsInSection:)] && [self.loadingDelegate respondsToSelector:@selector(loadingTableView:cellForRowAtIndexPath:)]) {
+        if ([self.loadingDelegate respondsToSelector:@selector(loadingTableView:numberOfRowsInSection:)] && [self.loadingDelegate respondsToSelector:@selector(loadingTableView:cellForRowAtIndexPath:)]) {
             self.loading = NO;
             self.allowsSelection = YES;
+            self.scrollEnabled = YES;
             [self reloadData];
         }
     }

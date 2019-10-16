@@ -26,11 +26,10 @@
     [self.collectionView startLoading];
 
     ///模仿网络请求
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        //net-request
-//        [self.tableView stopLoading];
-//        self.tableView.scrollEnabled = YES;
-//    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        //net-request
+        [self.collectionView stopLoading];
+    });
 }
 #pragma mark - UICollectionViewLoadingDelegate
 - (NSInteger)sectionsOfloadingCollectionView:(UICollectionView *)collectionView {
@@ -130,6 +129,10 @@
         return 10;
     }
     return 0.f;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
 }
 
 @end

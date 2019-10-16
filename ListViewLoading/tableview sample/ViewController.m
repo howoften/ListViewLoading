@@ -38,9 +38,9 @@
 }
 
 #pragma mark - UITableViewLoadingDelegate
-- (NSInteger)sectionsOfloadingTableView:(UITableView *)tableView {
-    return 1;
-}
+//- (NSInteger)sectionsOfloadingTableView:(UITableView *)tableView {
+//    return 1;
+//}
 
 - (NSInteger)loadingTableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 5;
@@ -102,11 +102,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 200;
+    return 220;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 35;
+    return 50;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

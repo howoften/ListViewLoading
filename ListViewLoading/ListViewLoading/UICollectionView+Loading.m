@@ -62,9 +62,10 @@
 
 - (void)startLoading {
     if ([self.loadingDelegate conformsToProtocol:@protocol(UICollectionViewLoadingDelegate)]) {
-        if ([self.loadingDelegate respondsToSelector:@selector(sectionsOfloadingCollectionView:)] && [self.loadingDelegate respondsToSelector:@selector(loadingCollectionView:numberOfItemsInSection:)] && [self.loadingDelegate respondsToSelector:@selector(loadingCollectionView:cellForItemAtIndexPath:)]) {
+        if ([self.loadingDelegate respondsToSelector:@selector(loadingCollectionView:numberOfItemsInSection:)] && [self.loadingDelegate respondsToSelector:@selector(loadingCollectionView:cellForItemAtIndexPath:)]) {
             [self setLoading:YES];
-            self.userInteractionEnabled = NO;
+            self.allowsSelection = NO;
+            self.scrollEnabled = NO;
             [self reloadData];
         }
     }
@@ -72,9 +73,10 @@
 
 - (void)stopLoading {
     if ([self.loadingDelegate conformsToProtocol:@protocol(UICollectionViewLoadingDelegate)]) {
-        if ([self.loadingDelegate respondsToSelector:@selector(sectionsOfloadingCollectionView:)] && [self.loadingDelegate respondsToSelector:@selector(loadingCollectionView:numberOfItemsInSection:)] && [self.loadingDelegate respondsToSelector:@selector(loadingCollectionView:cellForItemAtIndexPath:)]) {
+        if ([self.loadingDelegate respondsToSelector:@selector(loadingCollectionView:numberOfItemsInSection:)] && [self.loadingDelegate respondsToSelector:@selector(loadingCollectionView:cellForItemAtIndexPath:)]) {
             [self setLoading:NO];
-            self.userInteractionEnabled = YES;
+            self.allowsSelection = YES;
+            self.scrollEnabled = YES;
             [self reloadData];
         }
     }
