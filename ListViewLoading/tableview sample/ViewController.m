@@ -23,7 +23,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"首页";
-    self.tableView.allowsSelection = YES;
     // Do any additional setup after loading the view.
     
     self.tableView.loadingDelegate = self;
@@ -38,9 +37,9 @@
 }
 
 #pragma mark - UITableViewLoadingDelegate
-//- (NSInteger)sectionsOfloadingTableView:(UITableView *)tableView {
-//    return 1;
-//}
+- (NSInteger)sectionsOfloadingTableView:(UITableView *)tableView {
+    return 1;
+}
 
 - (NSInteger)loadingTableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 5;
