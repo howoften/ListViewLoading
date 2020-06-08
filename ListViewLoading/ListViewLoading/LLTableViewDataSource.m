@@ -354,15 +354,15 @@
 // Swipe actions
 // These methods supersede -editActionsForRowAtIndexPath: if implemented
 // return nil to get the default swipe actions
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 130000 && TARGET_OS_IOS
-- (nullable UISwipeActionsConfiguration *)tableView:(UITableView *)tableView leadingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 110000 && TARGET_OS_IOS
+- (nullable UISwipeActionsConfiguration *)tableView:(UITableView *)tableView leadingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath  API_AVAILABLE(ios(11.0)){
     if ([self.replace_delegate respondsToSelector:@selector(tableView:leadingSwipeActionsConfigurationForRowAtIndexPath:)]) {
         return [self.replace_delegate tableView:tableView leadingSwipeActionsConfigurationForRowAtIndexPath:indexPath];
     }
     return nil;
 }
 
-- (nullable UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (nullable UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath  API_AVAILABLE(ios(11.0)){
     if ([self.replace_delegate respondsToSelector:@selector(tableView:leadingSwipeActionsConfigurationForRowAtIndexPath:)]) {
         return [self.replace_delegate tableView:tableView leadingSwipeActionsConfigurationForRowAtIndexPath:indexPath];
     }
@@ -467,7 +467,7 @@
 // If you want the interaction effect on a different subview of the spring loaded cell, modify the context.targetView property. The default is the cell.
 // If this method is not implemented, the default is YES except when the row is part of a drag session.
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 110000 && TARGET_OS_IOS
-- (BOOL)tableView:(UITableView *)tableView shouldSpringLoadRowAtIndexPath:(NSIndexPath *)indexPath withContext:(id<UISpringLoadedInteractionContext>)context {
+- (BOOL)tableView:(UITableView *)tableView shouldSpringLoadRowAtIndexPath:(NSIndexPath *)indexPath withContext:(id<UISpringLoadedInteractionContext>)context  API_AVAILABLE(ios(11.0)){
     if ([self.replace_delegate respondsToSelector:@selector(tableView:shouldSpringLoadRowAtIndexPath:withContext:)]) {
         return [self.replace_delegate tableView:tableView shouldSpringLoadRowAtIndexPath:indexPath withContext:context];
     }
